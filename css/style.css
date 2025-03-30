@@ -177,8 +177,8 @@ nav ul li a:hover {
 /* ✅ Fixed circular profile image styling */
 
 .profile-pic-centered {
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
     border: 4px solid #1e1e1e;
@@ -191,7 +191,7 @@ nav ul li a:hover {
 
 .about-container {
     max-width: 800px;
-    margin: 60px auto;
+    margin: 30px auto;
     padding: 60px 30px;
     background-color: white;
     border-radius: 12px;
