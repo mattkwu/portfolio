@@ -199,6 +199,47 @@ nav ul li a:hover {
     text-align: center;
 }
 
+/* Smooth Scroll */
 html {
     scroll-behavior: smooth;
+}
+
+/* Home Hero Section */
+.home-hero {
+    padding: 100px 20px 60px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.home-hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: #1e1e1e;
+}
+
+.home-hero h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.home-hero p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.home-hero .btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.home-hero .btn:hover {
+    background-color: #0056b3;
 }
