@@ -216,3 +216,11 @@ html {
     font-weight: bold;
     color: #1e1e1e;
 }
+
+.about-wrapper h2.section-title {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
+    color: #1e1e1e;
+}
