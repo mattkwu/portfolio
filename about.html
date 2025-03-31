@@ -8,16 +8,25 @@
     <style>
         body {
             font-family: Georgia, serif;
+            background-color: #f0f2f5;
         }
+
+        .content-wrapper {
+            background: white;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
         .about-wrapper {
             display: flex;
             flex-direction: row;
             align-items: flex-start;
             justify-content: center;
             gap: 50px;
-            padding: 80px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin-top: 40px;
         }
 
         .about-text {
@@ -33,59 +42,85 @@
 
         .about-image img {
             width: 100%;
-            max-width: 350px;
+            max-width: 300px;
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
             text-align: center;
-            font-size: 2.8em;
-            margin-top: 60px;
             color: #1e1e1e;
+        }
+
+        header {
+            background: #1e1e1e;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: #00bcd4;
         }
     </style>
 </head>
 <body>
 
     <!-- ✅ Shared Header -->
-<header>
-    <h1>My Portfolio</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="resume.html">Resume</a></li>
-        </ul>
-    </nav>
-</header>
-    
-    <section id="about-title" class="page-header">
-    <h2>About Me</h2>
-</section>
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- ✅ Page Heading -->
-    <h1>About Me</h1>
+    <!-- ✅ Main Content Container -->
+    <div class="content-wrapper">
+        <h2 class="section-title">About Me</h2>
 
-    <!-- ✅ Two-Column About Section -->
-    <div class="about-wrapper">
-        <div class="about-text">
-            <p>
-                I’m a student in Electrical & Computer Engineering with a deep interest in how systems work — from microcontrollers to cloud platforms.
-                My passion lies in connecting the dots between low-level hardware and high-level applications.
-            </p>
-            <p>
-                I’ve worked on a range of technical projects: wearable sensors, embedded control systems, and interactive web dashboards.
-                I enjoy building tools and experiences that solve real-world problems and help people.
-            </p>
-            <p>
-                Outside of engineering, I enjoy photography, language learning, and spending time exploring new places. 
-                This site serves as both my digital playground and portfolio — a space to document my journey and growth.
-            </p>
-        </div>
-        <div class="about-image">
-            <img src="images/profile.jpg" alt="Profile Image">
+        <div class="about-wrapper">
+            <div class="about-text">
+                <p>
+                    I’m a student in Electrical & Computer Engineering with a deep interest in how systems work — from microcontrollers to cloud platforms.
+                    My passion lies in connecting the dots between low-level hardware and high-level applications.
+                </p>
+                <p>
+                    I’ve worked on a range of technical projects: wearable sensors, embedded control systems, and interactive web dashboards.
+                    I enjoy building tools and experiences that solve real-world problems and help people.
+                </p>
+                <p>
+                    Outside of engineering, I enjoy photography, language learning, and spending time exploring new places. 
+                    This site serves as both my digital playground and portfolio — a space to document my journey and growth.
+                </p>
+            </div>
+
+            <div class="about-image">
+                <img src="images/profile.jpg" alt="Profile Image">
+            </div>
         </div>
     </div>
 
