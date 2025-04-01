@@ -232,3 +232,48 @@ html {
     width: 100%;
     color: #1e1e1e;
 }
+
+.content-wrapper {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.about-title {
+    text-align: center;
+    font-size: 2.8em;
+    margin-bottom: 60px;
+    font-weight: bold;
+    color: #1e1e1e;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.about-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.about-section img {
+    width: 33%;
+    min-width: 280px;
+    max-width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+.about-text {
+    flex: 1;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+    max-width: 60%;
+}
+
