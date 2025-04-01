@@ -231,3 +231,10 @@ html {
     font-weight: bold;
     color: #1e1e1e;
 }
+
+.home-wrapper .about-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    flex: none;
+}
