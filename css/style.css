@@ -262,3 +262,12 @@ html {
 .resume-download a:hover {
     color: #b71c1c;
 }
+
+.disclaimer {
+    font-size: 0.9em;
+    color: #777;
+    font-style: italic;
+    max-width: 600px;
+    margin: 30px auto 10px;
+    line-height: 1.6;
+}
