@@ -1,5 +1,4 @@
 /* ✅ General Page Styling */
-
 body {
     font-family: 'Georgia', serif;
     background-color: #f0f2f5;
@@ -9,7 +8,6 @@ body {
 }
 
 /* ✅ Header and Navigation */
-
 header {
     background: #1e1e1e;
     color: white;
@@ -45,7 +43,6 @@ nav ul li a:hover {
 }
 
 /* ✅ Profile Picture Styling */
-
 .profile-pic {
     width: 180px;
     height: 180px;
@@ -57,7 +54,6 @@ nav ul li a:hover {
 }
 
 /* ✅ Social Media Section */
-
 .social-title {
     font-size: 1.8em;
     margin-top: 40px;
@@ -81,7 +77,6 @@ nav ul li a:hover {
 }
 
 /* ✅ Project Grid */
-
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -154,7 +149,6 @@ nav ul li a:hover {
 }
 
 /* ✅ Fixed circular profile image styling */
-
 .profile-pic-centered {
     width: 280px;
     height: 280px;
@@ -214,11 +208,12 @@ nav ul li a:hover {
     max-width: 60%;
 }
 
-/* Smooth Scroll */
+/* ✅ Smooth Scroll */
 html {
     scroll-behavior: smooth;
 }
 
+/* ✅ Page Headers */
 .page-header {
     background-color: #f7f7f7;
     padding: 60px 20px 30px;
@@ -239,6 +234,7 @@ html {
     flex: none;
 }
 
+/* ✅ Resume Download */
 .resume-download {
     text-align: center;
     margin-top: -20px;
@@ -263,6 +259,7 @@ html {
     color: #b71c1c;
 }
 
+/* ✅ Disclaimer Style */
 .disclaimer {
     font-size: 0.9em;
     color: #777;
@@ -272,8 +269,7 @@ html {
     line-height: 1.6;
 }
 
-/* ✅ Project Page Text Improvements */
-
+/* ✅ Project Page Text Spacing */
 .content-wrapper p {
     font-size: 1.15em;
     line-height: 1.9;
@@ -289,4 +285,13 @@ html {
 .content-wrapper h3 {
     margin-top: 40px;
     margin-bottom: 15px;
+}
+
+/* ✅ Image Rotation */
+.rotate-left {
+    transform: rotate(-90deg);
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
