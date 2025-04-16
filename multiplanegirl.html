@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Processing: Filter Visualization</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8" />
+  <title>Wearable Social Challenge Device</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+
   <header>
     <h1>My Portfolio</h1>
     <nav>
@@ -18,11 +19,40 @@
     </nav>
   </header>
 
-  <main class="content-wrapper">
-    <h2>Processing: Filter Visualization</h2>
-    <p>This is the detailed page for my Processing filter visualization project.</p>
-    <img src="../images/filter.png" alt="Filter Visualization Example" style="width: 100%; max-width: 600px;">
-    <p>More details coming soon!</p>
-  </main>
+  <div class="content-wrapper">
+    <h2>Wearable Social Challenge Device</h2>
+
+    <p>
+      This wearable device encourages real-world social interaction by assigning tasks and enforcing accountability through a TENS shock system if the task isn't completed. It's a blend of behavioral psychology, engineering, and creative discomfort.
+    </p>
+
+    <h3>🧠 Project Idea</h3>
+    <p>
+      I wanted to create something that would force me to talk to strangers in person. Motivation alone wasn't enough, so I introduced a consequence: a small electric shock.
+    </p>
+
+    <h3>🛠️ Progress</h3>
+    <p>
+      I started by connecting an OLED screen and ESP32. I integrated GPS, task randomization, and a relay-controlled TENS unit. I struggled with miswiring, GPS lag, and duct-taping it all to my wrist, but it worked!
+    </p>
+
+    <h3>⚙️ ECE Skills Used</h3>
+    <ul>
+      <li>Analog input from knobs</li>
+      <li>I2C for OLED</li>
+      <li>UART for GPS</li>
+      <li>Relay triggering via GPIO</li>
+      <li>Real-time task and countdown control</li>
+    </ul>
+
+    <h3>📷 Gallery</h3>
+    <img src="../images/esp32_image.png" alt="Wearable Device" style="max-width: 100%; border-radius: 12px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+
+    <h3>💬 Reflection</h3>
+    <p>
+      I shocked myself, literally, but I also learned how to build something physical that challenges behavior. This was one of the most fun and chaotic projects I’ve ever done.
+    </p>
+  </div>
+
 </body>
 </html>
