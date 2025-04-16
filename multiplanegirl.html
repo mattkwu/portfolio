@@ -46,7 +46,7 @@
 
     <h3><i class="fas fa-image"></i> Device Preview</h3>
     <img src="images/Project.jpg" alt="Socialize Watch" class="rotate-left">
-    
+
     <h3><i class="fas fa-microchip"></i> ECE Skills Used</h3>
     <ul>
         <li>Reading analog values from a potentiometer</li>
@@ -56,6 +56,38 @@
         <li>Parsing and filtering live GPS coordinates</li>
     </ul>
 
+    <div class="ece-breakdown" style="margin-top: 60px; text-align: left;">
+
+        <h3>1. Embedded Systems Programming</h3>
+        <hr style="width: 220px; margin: 5px 0 20px 0;">
+        <p>
+            Using Arduino (C++), you implemented a real-time interaction system that responds to user input via a potentiometer, 
+            displays updates on an OLED, reads GPS data through serial communication, and controls a relay to trigger physical feedback. 
+            You applied <code>millis()</code>-based non-blocking timers to manage task durations, a fundamental embedded programming technique.
+        </p>
+
+        <br>
+
+        <h3>2. Relay-Based Actuator Control</h3>
+        <hr style="width: 270px; margin: 5px 0 20px 0;">
+        <p>
+            You successfully integrated a hardware relay with the ESP32 to control a high-voltage device (TENS unit) using low-voltage logic. 
+            This involved understanding how to safely isolate and switch circuits using digital outputs. 
+            You physically modified commercial hardware and routed it through a programmable switch — showcasing real-world actuator control 
+            and circuit-level reasoning.
+        </p>
+
+        <br>
+
+        <h3>3. GPS Sensor Integration & Location Filtering</h3>
+        <hr style="width: 360px; margin: 5px 0 20px 0;">
+        <p>
+            By interfacing a NEO-6M GPS module with the ESP32, you retrieved real-time coordinates and compared them to preset geofences to adapt behavior. 
+            You dynamically filtered task lists based on physical location, demonstrating your ability to combine hardware sensor data 
+            with logical control structures in software.
+        </p>
+    </div>
+
     <h3><i class="fas fa-comment"></i> Reflection</h3>
     <p>
         This was probably the wildest and most personal project I’ve ever done. I shocked myself on purpose, learned how to debug hardware under pressure, 
@@ -63,7 +95,6 @@
         into a real working prototype.
     </p>
 </div>
+
 </body>
 </html>
-
-
