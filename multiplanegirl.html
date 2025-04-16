@@ -21,29 +21,45 @@
 </header>
 
 <div class="content-wrapper">
-    <h2>Wearable Social Challenge Device</h2>
-    <p>This wearable device encourages real-world social interaction by assigning tasks and enforcing accountability through a TENS shock system if the task isn't completed. It's a blend of behavioral psychology, engineering, and creative discomfort.</p>
+    <h2>Socialize Watch</h2>
 
-    <h3><i class="fas fa-brain"></i> Project Idea</h3>
-    <p>I wanted to create something that would force me to talk to strangers in person. Motivation alone wasn’t enough, so I introduced a consequence: a small electric shock.</p>
+    <p>
+        When I first came to college, I found myself spending most of my time isolated in my room and gradually avoiding social interaction altogether. 
+        I wanted something that would actively remind me to engage with people — but I knew gentle reminders weren’t enough. 
+        So I built a wearable device with a little extra “encouragement”: if I skip a task, it shocks me. 
+        The goal was to make it practical, personal, and uncomfortable enough to work — so I designed it in the form of a watch.
+    </p>
 
-    <h3><i class="fas fa-microchip"></i> Progress</h3>
-    <p>I started by connecting an OLED screen and ESP32. I integrated GPS, task randomization, and a relay-controlled TENS unit. I struggled with miswiring, GPS lag, and duct-taping it all to my wrist, but it worked!</p>
+    <h3><i class="fas fa-lightbulb"></i> Project Idea</h3>
+    <p>
+        I wanted to build something that would challenge me to socialize more in person. Traditional reminders didn’t work for me, so I added a physical feedback system: 
+        if I ignore a task, the device triggers a shock via a TENS unit. It’s part experiment, part self-growth, and part embedded systems challenge.
+    </p>
 
-    <h3><i class="fas fa-cogs"></i> ECE Skills Used</h3>
+    <h3><i class="fas fa-wrench"></i> Project Development</h3>
+    <p>
+        I started by building a basic OLED + ESP32 interface, then added GPS, knobs, and task randomization. I tested each component in isolation, 
+        then integrated them using real-time logic. I even used duct tape for early wearability tests.
+    </p>
+
+    <h3><i class="fas fa-microchip"></i> ECE Skills Used</h3>
     <ul>
-        <li>Analog input from knobs</li>
-        <li>I2C for OLED</li>
-        <li>UART for GPS</li>
-        <li>Relay triggering via GPIO</li>
-        <li>Real-time task and countdown control</li>
+        <li>Reading analog values from a potentiometer</li>
+        <li>Using I2C for OLED and UART for GPS</li>
+        <li>Implementing logic-controlled relay switching</li>
+        <li>Conditional timing with state-based task control</li>
+        <li>Parsing and filtering live GPS coordinates</li>
     </ul>
 
-    <h3><i class="fas fa-camera"></i> Gallery</h3>
-    <img src="images/esp32_ai_image.png" alt="Wearable Device" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+    <h3><i class="fas fa-image"></i> Device Preview</h3>
+    <img src="images/esp32_ai_image.png" alt="Socialize Watch" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
 
-    <h3><i class="fas fa-lightbulb"></i> Reflection</h3>
-    <p>I shocked myself, literally, but I also learned how to build something physical that challenges behavior. This was one of the most fun and chaotic projects I’ve ever done.</p>
+    <h3><i class="fas fa-comment"></i> Reflection</h3>
+    <p>
+        This was probably the wildest and most personal project I’ve ever done. I shocked myself on purpose, learned how to debug hardware under pressure, 
+        and had fun watching people react when I told them what it does. More importantly, it taught me how to blend behavior science and embedded systems 
+        into a real working prototype.
+    </p>
 </div>
 
 </body>
