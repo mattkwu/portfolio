@@ -287,11 +287,19 @@ html {
     margin-bottom: 15px;
 }
 
+.rotated-wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
 .rotate-left {
-    transform: rotate(-90deg);
-    display: block;
-    margin: 40px auto;
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transform: rotate(-90deg);
+  display: block;
+  width: auto;
+  max-height: 500px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
