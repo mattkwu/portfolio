@@ -271,3 +271,22 @@ html {
     margin: 30px auto 10px;
     line-height: 1.6;
 }
+
+/* ✅ Project Page Text Improvements */
+
+.content-wrapper p {
+    font-size: 1.15em;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.content-wrapper ul li {
+    line-height: 1.8;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.content-wrapper h3 {
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
