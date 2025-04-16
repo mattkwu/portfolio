@@ -297,9 +297,11 @@ html {
 
 .rotate-left {
   transform: rotate(-90deg);
+  transform-origin: center;
   display: block;
-  width: auto;
+  margin: 40px auto;
   max-height: 500px;
+  width: auto;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
