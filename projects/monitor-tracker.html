@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autonomous monitor tracking system · Matthew Wu</title>
+  <meta name="description" content="A monitor that follows its user around the room. OpenCV and a Kalman filter on a laptop, a 200 Hz PID loop on an ESP32.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Matthew Wu</a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+          <li><a href="../index.html#abroad">Abroad</a></li>
+          <li><a href="../resume.html">Resume</a></li>
+          <li class="hide-sm"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="../index.html#projects">Back to all projects</a>
+        <h1>Autonomous monitor tracking system</h1>
+        <p class="lede">A monitor that turns to follow me around the room, whether I'm at my desk, on a call, or working out in front of it. The camera and vision run on my laptop. The motion runs on an ESP32.</p>
+        <dl class="meta">
+          <div><dt>When</dt><dd>Mar – Apr 2026</dd></div>
+          <div><dt>Role</dt><dd>Solo: software, firmware, hardware</dd></div>
+          <div><dt>Stack</dt><dd>Python, OpenCV, C++, ESP32</dd></div>
+          <div><dt>Context</dt><dd>Personal project</dd></div>
+        </dl>
+      </div>
+    </section>
+    <div class="wrap">
+      <figure class="case-figure">
+        <div class="frame"><img class="diagram" src="../images/diagrams/monitor-tracker.svg" alt="The full loop. The camera watches the result of every move, so the system corrects itself continuously."></div>
+        <figcaption>The full loop. The camera watches the result of every move, so the system corrects itself continuously.</figcaption>
+      </figure>
+      <div class="case-body">
+        <nav class="toc" aria-label="On this page">
+          <ol>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#approach">How I approached it</a></li>
+            <li><a href="#build-log">Build log</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#learned">What I learned</a></li>
+          </ol>
+        </nav>
+        <div class="prose">
+          <section id="problem">
+            <h2>The problem</h2>
+            <p>My monitor sits on a fixed arm, but I don't sit still. I study at the desk, take calls pacing around, and follow workout videos a few meters back. Every time I moved, the screen was pointed at the wrong place.</p>
+            <p>I wanted the monitor to keep facing me on its own, smoothly enough that I wouldn't notice it moving, and fast enough that it never lagged behind.</p>
+          </section>
+          <section id="approach">
+            <h2>How I approached it</h2>
+            <p>I split the system in two. Seeing is heavy work, so detection runs in Python on a laptop. Moving needs tight, predictable timing, so control runs in C++ on an ESP32. A serial link carries one number between them: where the monitor should point.</p>
+            <p>That split meant I could iterate on vision without touching firmware, and tune the motor without re-running the camera.</p>
+          </section>
+          <section id="build-log">
+            <h2>Build log</h2>
+            <ol class="log">
+              <li>
+                <h3>Get detection working on a laptop</h3>
+                <p>I started with OpenCV person detection on a plain webcam feed and drew boxes over myself. It worked, but the box center jumped a few pixels every frame, and it disappeared entirely when I turned sideways.</p>
+                <p>Pointing a motor straight at that raw position would have made the monitor shake.</p>
+              </li>
+              <li>
+                <h3>Smooth it with a Kalman filter</h3>
+                <p>I added a Kalman filter with a constant-velocity model. Each frame it blends where it predicted I'd be with where the detector says I am, weighted by how much it trusts each one.</p>
+                <p>Two things improved at once. The jitter mostly disappeared, and when detection dropped out for a few frames the filter kept predicting my position instead of losing me. That's what brought target lock up to 95%.</p>
+                <p class="note">Tuning the noise values was the real work. Trust the detector too much and the jitter comes back. Trust the model too much and the monitor lags behind fast movements.</p>
+              </li>
+              <li>
+                <h3>Close the loop on the ESP32</h3>
+                <p>The laptop sends a target angle over serial. The ESP32 runs a PID loop at 200 Hz to drive the pan motor to it.</p>
+                <p>My first gains overshot and oscillated around the target. I tuned in order: proportional until it responded quickly, derivative to damp the overshoot, then a small integral term to remove the last bit of steady-state offset. The goal was a move that feels deliberate, not twitchy.</p>
+              </li>
+              <li>
+                <h3>Chase down latency</h3>
+                <p>Even with good control, the monitor felt late. I timed each stage separately: frame capture, detection, filtering, serial, and motor response.</p>
+                <p>Most of the delay was in vision, so I lowered the capture resolution to what detection actually needed and kept serial messages small. End to end, camera to motion, it came in under 75 ms.</p>
+              </li>
+              <li>
+                <h3>Test it in real use</h3>
+                <p>I ran 20+ sessions doing what I actually do in front of the monitor: studying, video calls, and workouts. I logged where it lost me and fixed those cases one at a time.</p>
+                <p>It now tracks reliably out to about 3 meters, which covers the whole space I use.</p>
+              </li>
+            </ol>
+          </section>
+          <section id="results">
+            <h2>Results</h2>
+            <dl class="results">
+              <div><dt>95%</dt><dd>target lock accuracy across test sessions</dd></div>
+              <div><dt>&lt;75 ms</dt><dd>end-to-end latency, camera to motion</dd></div>
+              <div><dt>200 Hz</dt><dd>closed-loop PID on the ESP32</dd></div>
+              <div><dt>3 m</dt><dd>maximum tracking distance</dd></div>
+              <div><dt>20+</dt><dd>real-use test sessions</dd></div>
+            </dl>
+
+          </section>
+          <section id="learned">
+            <h2>What I learned</h2>
+            <p>Most of the difficulty wasn't in any one component. It was in the seams: noisy detections feeding a controller, and latency stacking up across stages. Measuring each stage on its own was what made the problem solvable.</p>
+            <p>Next, I'd move detection onto the device itself, so the system doesn't need a laptop at all.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <a href="adaptive-controller.html"><span>Next project</span><strong>Adaptive wearable gaming controller</strong></a>
+    </div>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for summer 2027 roles in forward-deployed, field, and embedded engineering. The fastest way to reach me is email.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mwu418@gatech.edu">mwu418@gatech.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/matthewkwu" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/mattkwu" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="../Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+      <p class="fine">Matthew Wu, Atlanta, Georgia. Built by hand and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
+</body>
+</html>

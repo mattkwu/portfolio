@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI trading assistant · Matthew Wu</title>
+  <meta name="description" content="An LLM trading agent built around discipline: plain-English strategies, automatic backtesting, and hard guardrails.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Matthew Wu</a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+          <li><a href="../index.html#abroad">Abroad</a></li>
+          <li><a href="../resume.html">Resume</a></li>
+          <li class="hide-sm"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="../index.html#projects">Back to all projects</a>
+        <h1>AI trading assistant</h1>
+        <p class="lede">An LLM trading agent built around discipline, not prediction. I write a strategy in plain English, it gets turned into code and backtested automatically, and only strategies that pass are allowed to trade, behind hard limits.</p>
+        <dl class="meta">
+          <div><dt>When</dt><dd>Jun 2026 – present</dd></div>
+          <div><dt>Role</dt><dd>Solo</dd></div>
+          <div><dt>Stack</dt><dd>Python, MCP, Pine Script v6</dd></div>
+          <div><dt>Platform</dt><dd>Robinhood Agentic API</dd></div>
+        </dl>
+      </div>
+    </section>
+    <div class="wrap">
+      <figure class="case-figure">
+        <div class="frame"><img class="diagram" src="../images/diagrams/trading-assistant.svg" alt="A strategy only reaches the live agent after it passes the backtest gate. Guardrails sit between the agent and the broker."></div>
+        <figcaption>A strategy only reaches the live agent after it passes the backtest gate. Guardrails sit between the agent and the broker.</figcaption>
+      </figure>
+      <div class="case-body">
+        <nav class="toc" aria-label="On this page">
+          <ol>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#approach">How I approached it</a></li>
+            <li><a href="#build-log">Build log</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#learned">What I learned</a></li>
+          </ol>
+        </nav>
+        <div class="prose">
+          <section id="problem">
+            <h2>The problem</h2>
+            <p>Before writing any code, I read through 200+ posts across 10 trading communities on Reddit to understand why retail traders lose money.</p>
+            <p>The pattern was consistent. The problem usually wasn't a bad strategy. It was breaking the rules of a decent one: overtrading, revenge trades, ignoring stop losses. So I decided to build a tool that enforces discipline rather than one that tries to predict the market.</p>
+          </section>
+          <section id="approach">
+            <h2>How I approached it</h2>
+            <p>Three ideas shaped the design. Strategies should be easy to state, so they're written in plain English. Nothing trades until it has been tested on real data. And the agent can never act outside limits I set in advance, no matter what it decides.</p>
+          </section>
+          <section id="build-log">
+            <h2>Build log</h2>
+            <ol class="log">
+              <li>
+                <h3>Connect the agent to a broker</h3>
+                <p>I built the agent on Robinhood's Agentic API, connected through MCP. That gives the LLM a defined set of tools, like quotes, positions, and orders, instead of open-ended access.</p>
+              </li>
+              <li>
+                <h3>Turn plain-English rules into code</h3>
+                <p>Writing a backtest by hand for every idea took me about two hours. I built a backtester that takes a rule like "buy the 9:45 pullback if volume is above average" and turns it into testable code.</p>
+                <p>Validation went from about 2 hours to about 5 minutes per strategy.</p>
+              </li>
+              <li>
+                <h3>Make every strategy earn its place</h3>
+                <p>Each strategy runs against six months of 5-minute price data. I set a bar: below a 70% win rate, it's cut.</p>
+                <p>Of the first five strategies I tested, three failed and were rejected. That was the point. They would have felt convincing in the moment.</p>
+              </li>
+              <li>
+                <h3>Add guardrails</h3>
+                <p>The guardrails are the core of the project. Every order is reviewed before it's sent. The agent works in an isolated account. Daily trade limits cap how much it can do, so a bad decision stays small.</p>
+                <p>I also added Pine Script v6 indicators so the same rules can be watched visually in TradingView.</p>
+              </li>
+              <li>
+                <h3>Put it in front of other traders</h3>
+                <p>I shared it in a Discord community. 15+ users have used it and reported that it helps them stick to their rules, which was the original goal.</p>
+              </li>
+            </ol>
+          </section>
+          <section id="results">
+            <h2>Results</h2>
+            <dl class="results">
+              <div><dt>2 hr → 5 min</dt><dd>time to validate a strategy</dd></div>
+              <div><dt>3 of 5</dt><dd>early strategies rejected by the backtest gate</dd></div>
+              <div><dt>45% → 78%</dt><dd>win rate over 1,000+ trades</dd></div>
+              <div><dt>15+</dt><dd>Discord users reporting better discipline</dd></div>
+            </dl>
+            <p>Trading results are from my own account over a short period. Past performance doesn't predict future returns, and this isn't financial advice.</p>
+          </section>
+          <section id="learned">
+            <h2>What I learned</h2>
+            <p>With LLM agents, the interesting engineering is in the constraints. Deciding what the agent is not allowed to do took more thought than anything it does.</p>
+            <p>Talking to users before building saved me from solving the wrong problem.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <a href="task-watch.html"><span>Next project</span><strong>Arduino task watch</strong></a>
+    </div>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for summer 2027 roles in forward-deployed, field, and embedded engineering. The fastest way to reach me is email.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mwu418@gatech.edu">mwu418@gatech.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/matthewkwu" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/mattkwu" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="../Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+      <p class="fine">Matthew Wu, Atlanta, Georgia. Built by hand and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
+</body>
+</html>

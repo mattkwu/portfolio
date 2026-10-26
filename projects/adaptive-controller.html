@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adaptive wearable gaming controller · Matthew Wu</title>
+  <meta name="description" content="A wrist-worn controller for players with limited hand mobility, built in 36 hours at TECHHACK Valley.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Matthew Wu</a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+          <li><a href="../index.html#abroad">Abroad</a></li>
+          <li><a href="../resume.html">Resume</a></li>
+          <li class="hide-sm"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="../index.html#projects">Back to all projects</a>
+        <h1>Adaptive wearable gaming controller</h1>
+        <p class="lede">A wrist-worn controller for players with limited hand mobility. It turns wrist gestures into standard gamepad inputs, so it works with games people already own. Built with a team of four in 36 hours.</p>
+        <dl class="meta">
+          <div><dt>When</dt><dd>Mar 2026</dd></div>
+          <div><dt>Event</dt><dd>TECHHACK Valley hackathon</dd></div>
+          <div><dt>Team</dt><dd>4 people, I owned the firmware</dd></div>
+          <div><dt>Stack</dt><dd>C++, ESP32, IMU</dd></div>
+        </dl>
+      </div>
+    </section>
+    <div class="wrap">
+      <figure class="case-figure">
+        <div class="frame"><img class="diagram" src="../images/diagrams/adaptive-controller.svg" alt="The input pipeline. All of it runs on the ESP32 strapped to the wrist."></div>
+        <figcaption>The input pipeline. All of it runs on the ESP32 strapped to the wrist.</figcaption>
+      </figure>
+      <div class="case-body">
+        <nav class="toc" aria-label="On this page">
+          <ol>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#approach">How we approached it</a></li>
+            <li><a href="#build-log">Build log</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#learned">What I learned</a></li>
+          </ol>
+        </nav>
+        <div class="prose">
+          <section id="problem">
+            <h2>The problem</h2>
+            <p>Standard controllers assume two hands with full finger control. For players with limited mobility, that rules out most games before they even start.</p>
+            <p>Our goal was a controller built around the movement a player does have. Wrist motion is often still available when fine finger control isn't.</p>
+          </section>
+          <section id="approach">
+            <h2>How we approached it</h2>
+            <p>We made one early decision that shaped everything else: the controller would identify itself to the computer as a standard HID gamepad. No drivers, no custom game support. If a game takes a controller, it takes ours.</p>
+            <p>That meant everything, from sensing to deciding what a gesture means, had to happen on the ESP32 itself.</p>
+          </section>
+          <section id="build-log">
+            <h2>Build log</h2>
+            <ol class="log">
+              <li>
+                <h3>Read the IMU</h3>
+                <p>We started with raw accelerometer and gyroscope data from an IMU on the wrist. Neither works on its own. The accelerometer knows which way is down but is noisy whenever your arm moves. The gyroscope is smooth but drifts over time.</p>
+              </li>
+              <li>
+                <h3>Fuse the sensors into an orientation</h3>
+                <p>I wrote sensor fusion that combines both: the gyroscope for fast, smooth motion, and the accelerometer to correct its slow drift. The result is a stable estimate of wrist orientation, updated 300 times per second.</p>
+              </li>
+              <li>
+                <h3>Turn orientation into gestures</h3>
+                <p>With a clean orientation signal, gesture recognition became thresholds and timing windows. A tilt held past a threshold for long enough is a gesture, and a brief wobble isn't.</p>
+                <p>Because everyone's range of motion is different, each user calibrates their own neutral position and limits. We exposed six gesture slots that can be mapped to any button.</p>
+              </li>
+              <li>
+                <h3>Fix the lag</h3>
+                <p>Our first full build worked, but felt sluggish in game. The problem was the order of operations: gestures were detected in one pass and reports sent in a later one.</p>
+                <p>I restructured the firmware so detection and the HID report happen in the same loop iteration. Latency dropped to 12 ms, below what a player can feel.</p>
+              </li>
+              <li>
+                <h3>Test and demo</h3>
+                <p>We tested each of the six gestures repeatedly and reached 98% recognition accuracy, then demoed the controller live in a real game at judging.</p>
+              </li>
+            </ol>
+          </section>
+          <section id="results">
+            <h2>Results</h2>
+            <dl class="results">
+              <div><dt>98%</dt><dd>gesture recognition accuracy</dd></div>
+              <div><dt>12 ms</dt><dd>gesture to game input</dd></div>
+              <div><dt>300 Hz</dt><dd>sensor fusion and detection rate</dd></div>
+              <div><dt>6</dt><dd>remappable gestures</dd></div>
+              <div><dt>36 hr</dt><dd>from idea to working demo</dd></div>
+            </dl>
+
+          </section>
+          <section id="learned">
+            <h2>What I learned</h2>
+            <p>Accessibility design starts with the user's range of motion, not the device's. Per-user calibration did more for accuracy than any filtering change.</p>
+            <p>In a hackathon, the decision to use standard HID saved us. It removed a whole category of work and let us spend our time on the part that mattered.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <a href="trading-assistant.html"><span>Next project</span><strong>AI trading assistant</strong></a>
+    </div>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for summer 2027 roles in forward-deployed, field, and embedded engineering. The fastest way to reach me is email.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mwu418@gatech.edu">mwu418@gatech.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/matthewkwu" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/mattkwu" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="../Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+      <p class="fine">Matthew Wu, Atlanta, Georgia. Built by hand and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
+</body>
+</html>

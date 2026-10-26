@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arduino task watch · Matthew Wu</title>
+  <meta name="description" content="A GPS wearable that verifies scheduled tasks and gives a mild shock when they're skipped.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Matthew Wu</a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="../index.html#projects" aria-current="page">Projects</a></li>
+          <li><a href="../index.html#abroad">Abroad</a></li>
+          <li><a href="../resume.html">Resume</a></li>
+          <li class="hide-sm"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="../index.html#projects">Back to all projects</a>
+        <h1>Arduino task watch</h1>
+        <p class="lede">A wearable that checks whether I actually did what I said I would. It uses GPS to confirm I'm where the task happens, and if I skip it, it shocks me.</p>
+        <dl class="meta">
+          <div><dt>When</dt><dd>Nov 2024 – Jan 2025</dd></div>
+          <div><dt>Role</dt><dd>Solo</dd></div>
+          <div><dt>Stack</dt><dd>C++, ESP32, GPS</dd></div>
+          <div><dt>Context</dt><dd>Class project</dd></div>
+        </dl>
+      </div>
+    </section>
+    <div class="wrap">
+      <figure class="case-figure">
+        <div class="frame"><img class="photo" src="../images/projects/task-watch.jpg" alt="The task watch prototype on a breadboard, wired to a relay and a TENS unit with electrodes on an arm" style="object-position: center 30%"></div>
+        <figcaption>The prototype: ESP32 and GPS on a breadboard, a relay, and the modified TENS unit.</figcaption>
+      </figure>
+      <div class="case-body">
+        <nav class="toc" aria-label="On this page">
+          <ol>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#approach">How I approached it</a></li>
+            <li><a href="#build-log">Build log</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#learned">What I learned</a></li>
+          </ol>
+        </nav>
+        <div class="prose">
+          <section id="problem">
+            <h2>The problem</h2>
+            <p>My first semester of college, I spent most of my time in my room and slowly stopped putting myself in social situations. Reminders on my phone were easy to swipe away.</p>
+            <p>I wanted something I couldn't ignore. So I built a watch that gives me a task, checks that I'm actually in the right place to do it, and makes skipping it uncomfortable.</p>
+          </section>
+          <section id="approach">
+            <h2>How I approached it</h2>
+            <p>The watch had to answer two questions on its own: did I start the task, and am I really where I said I'd be. A twist knob handles the first. GPS handles the second.</p>
+            <table class="parts">
+              <tbody>
+                <tr><th>ESP32 dev module</th><td>Runs the task, GPS, display, and relay logic</td></tr>
+                <tr><th>SSD1306 OLED, 128×64</th><td>Shows tasks, countdowns, and location</td></tr>
+                <tr><th>NEO-6M GPS</th><td>Live position for geofencing</td></tr>
+                <tr><th>10 kΩ potentiometer</th><td>Twist to start and complete tasks</td></tr>
+                <tr><th>5 V relay module</th><td>Switches the stimulation unit on and off</td></tr>
+                <tr><th>TENS 7000 unit</th><td>Delivers the shock, three intensity levels</td></tr>
+                <tr><th>3.7 V 1000 mAh LiPo</th><td>Powers the whole wearable</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section id="build-log">
+            <h2>Build log</h2>
+            <ol class="log">
+              <li>
+                <h3>Design the behavior as a state machine</h3>
+                <p>Before wiring anything, I mapped the device's behavior into eight states: idle, picking a task, showing it, waiting to start, counting down, checking location, success, and failure.</p>
+                <p>Writing it as a state machine made the firmware predictable. Every input has a defined meaning in each state, and nothing happens by accident.</p>
+              </li>
+              <li>
+                <h3>Keep everything running at once</h3>
+                <p>The ESP32 has to read the knob, parse GPS, update the display, and run a countdown at the same time. Blocking delays would freeze everything else.</p>
+                <p>I used non-blocking timers instead, so the main loop processes input at 100 Hz while tasks count down in the background.</p>
+              </li>
+              <li>
+                <h3>Verify location with a geofence</h3>
+                <p>The GPS module streams coordinates over serial. I compare each fix to a 15-meter radius around where the task should happen, and tasks are also filtered by where I am.</p>
+                <p>Raw GPS wanders, especially indoors, so the check requires a stable fix before it counts.</p>
+              </li>
+              <li>
+                <h3>Wire in the consequence</h3>
+                <p>I opened up a commercial TENS unit, soldered it to a relay, and let the ESP32 switch it. The shock has three intensity levels, and it gets stronger the longer a task is overdue.</p>
+                <p class="note">The relay keeps the stimulation circuit fully isolated from the logic side. The ESP32 only ever controls a switch.</p>
+              </li>
+              <li>
+                <h3>Wear it</h3>
+                <p>I wore it around campus and tested it in real situations. People constantly asked what it was, which turned out to be part of the point. It started conversations on its own.</p>
+              </li>
+            </ol>
+          </section>
+          <section id="results">
+            <h2>Results</h2>
+            <dl class="results">
+              <div><dt>8</dt><dd>states in the firmware state machine</dd></div>
+              <div><dt>5</dt><dd>hardware peripherals coordinated</dd></div>
+              <div><dt>100 Hz</dt><dd>input processing rate</dd></div>
+              <div><dt>15 m</dt><dd>geofence verification radius</dd></div>
+              <div><dt>3</dt><dd>adaptive intensity levels</dd></div>
+            </dl>
+
+          </section>
+          <section id="learned">
+            <h2>What I learned</h2>
+            <p>This was my first full embedded build, and it's what pulled me toward computing hardware. Designing behavior as a state machine before writing code is a habit I've kept on every project since.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <a href="monitor-tracker.html"><span>Back to the first project</span><strong>Autonomous monitor tracking system</strong></a>
+    </div>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for summer 2027 roles in forward-deployed, field, and embedded engineering. The fastest way to reach me is email.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mwu418@gatech.edu">mwu418@gatech.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/matthewkwu" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/mattkwu" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="../Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+      <p class="fine">Matthew Wu, Atlanta, Georgia. Built by hand and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
+</body>
+</html>

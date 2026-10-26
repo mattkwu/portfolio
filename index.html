@@ -1,55 +1,203 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ECE Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matthew Wu · Computer Engineering</title>
+  <meta name="description" content="Matthew Wu, computer engineering student at Georgia Tech. Embedded systems, real-time control, and applied AI projects, written up as build logs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="resume.html">Resume</a></li>
-            </ul>
-        </nav>
-    </header>
-  
-    <!-- ✅ About Me Section -->
-    <div class="content-wrapper home-wrapper">
-        <section id="about">
-                <div class="about-text">
-                    <h2>My Story</h2>
-                    <p>
-                        I'm a first-year Computer Engineering student at Georgia Tech, exploring everything from distributed systems to hardware design. 
-                        I've always been fascinated by how complex systems actually work—what makes them tick, and how software and hardware come together 
-                        to build something useful. Lately, I've felt inspired to share what I'm working on, whether that's a cool project, an interesting 
-                        challenge, or just something I wish someone had explained to me sooner. My goal is to document my engineering journey in a way that's 
-                        not only authentic and relatable but also helpful for anyone looking to learn or find inspiration along the way.
-                    </p>
+  <a class="skip" href="#main">Skip to content</a>
 
-                <!-- ✅ Circular profile image with fixed size -->
-           <img src="images/headshot-pic.jpg" alt="Headshot" class="profile-pic-centered">
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Matthew Wu</a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#abroad">Abroad</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li class="hide-sm"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-                    <p class="disclaimer">
-  This is an ePortfolio for sharing what I’m building, learning, and figuring out as I grow through engineering. Click the sections above to access links to my about page, projects, and resume.
-</p>
-
-            <h3 class="social-title">Social Media Links</h3>
-            <div class="social-links">
-                <a href="https://www.instagram.com/mattkwu/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/matthewkwu/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.facebook.com/matthew.wu.9887/" target="_blank"><i class="fab fa-facebook"></i></a>
-                </div>
-            </div>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Matthew Wu</h1>
+          <p class="lede">I build embedded systems that sense people and respond in real time, then keep testing them until they hold up outside the lab.</p>
+          <div class="btn-row">
+            <a class="btn primary" href="#projects">See the projects</a>
+            <a class="btn" href="Resume.pdf" target="_blank" rel="noopener">Download resume (PDF)</a>
+          </div>
+          <svg class="hero-trace" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+            <path class="draw" d="M4,20 H180 L200,6 H330 L350,34 H470 L486,20 H580"/>
+            <circle cx="4" cy="20" r="6"/>
+            <circle class="via-end" cx="586" cy="20" r="6"/>
+          </svg>
         </div>
+        <div class="portrait">
+          <img src="images/headshot.jpg" alt="Portrait of Matthew Wu" width="800" height="1010">
+          <dl class="facts">
+            <div><dt>Studying</dt><dd>B.S. Computer Engineering, Georgia Tech, 2028</dd></div>
+            <div><dt>Next</dt><dd>Engines Engineering co-op, GE Aerospace, Spring 2027</dd></div>
+            <div><dt>Focus</dt><dd>Embedded systems, real-time control, applied AI</dd></div>
+            <div><dt>Speaks</dt><dd>English, Mandarin, Spanish</dd></div>
+          </dl>
+        </div>
+      </div>
     </section>
-</div>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="projects-title">Projects</h2>
+          <p>Each project is written as a build log: what I set out to do, what broke, and what I changed to get it working. The numbers come at the end.</p>
+        </div>
+
+        <ol class="boards">
+          <li class="board">
+            <div class="board-inner">
+              <a class="board-visual" href="projects/monitor-tracker.html" tabindex="-1" aria-hidden="true">
+                <img class="diagram" src="images/diagrams/monitor-tracker.svg" alt="" loading="lazy">
+              </a>
+              <div>
+                <p class="when"><span>Mar – Apr 2026</span><span>Personal project</span></p>
+                <h3><a href="projects/monitor-tracker.html">Autonomous monitor tracking system</a></h3>
+                <p class="summary">A monitor that turns to follow me around the room, whether I'm at the desk, on a call, or working out. Vision on a laptop, control on an ESP32.</p>
+                <dl class="readouts">
+                  <div><dt>95%</dt><dd>target lock</dd></div>
+                  <div><dt>&lt;75 ms</dt><dd>camera to motion</dd></div>
+                  <div><dt>200 Hz</dt><dd>PID control loop</dd></div>
+                </dl>
+                <ul class="tags"><li>Python</li><li>OpenCV</li><li>Kalman filter</li><li>C++</li><li>ESP32</li><li>PID</li></ul>
+                <a class="btn" href="projects/monitor-tracker.html">Read the build log</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="board">
+            <div class="board-inner">
+              <a class="board-visual" href="projects/adaptive-controller.html" tabindex="-1" aria-hidden="true">
+                <img class="diagram" src="images/diagrams/adaptive-controller.svg" alt="" loading="lazy">
+              </a>
+              <div>
+                <p class="when"><span>Mar 2026</span><span>TECHHACK Valley, team of 4, 36 hours</span></p>
+                <h3><a href="projects/adaptive-controller.html">Adaptive wearable gaming controller</a></h3>
+                <p class="summary">A wrist-worn controller for players with limited hand mobility. Wrist gestures become standard gamepad inputs, so it works with games that already exist.</p>
+                <dl class="readouts">
+                  <div><dt>98%</dt><dd>gesture accuracy</dd></div>
+                  <div><dt>12 ms</dt><dd>response latency</dd></div>
+                  <div><dt>300 Hz</dt><dd>sensor fusion rate</dd></div>
+                </dl>
+                <ul class="tags"><li>C++</li><li>ESP32</li><li>IMU fusion</li><li>HID</li></ul>
+                <a class="btn" href="projects/adaptive-controller.html">Read the build log</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="board">
+            <div class="board-inner">
+              <a class="board-visual" href="projects/trading-assistant.html" tabindex="-1" aria-hidden="true">
+                <img class="diagram" src="images/diagrams/trading-assistant.svg" alt="" loading="lazy">
+              </a>
+              <div>
+                <p class="when"><span>Jun 2026 – present</span><span>Personal project</span></p>
+                <h3><a href="projects/trading-assistant.html">AI trading assistant</a></h3>
+                <p class="summary">An LLM trading agent built around discipline, not prediction. Strategies are written in plain English, backtested automatically, and traded behind hard guardrails.</p>
+                <dl class="readouts">
+                  <div><dt>5 min</dt><dd>to validate a strategy, down from 2 hr</dd></div>
+                  <div><dt>1,000+</dt><dd>trades logged</dd></div>
+                  <div><dt>15+</dt><dd>Discord users</dd></div>
+                </dl>
+                <ul class="tags"><li>Python</li><li>LLM agents</li><li>MCP</li><li>Pine Script v6</li></ul>
+                <a class="btn" href="projects/trading-assistant.html">Read the build log</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="board">
+            <div class="board-inner">
+              <a class="board-visual" href="projects/task-watch.html" tabindex="-1" aria-hidden="true">
+                <img src="images/projects/task-watch.jpg" alt="" loading="lazy" style="object-position: center 35%">
+              </a>
+              <div>
+                <p class="when"><span>Nov 2024 – Jan 2025</span><span>Class project</span></p>
+                <h3><a href="projects/task-watch.html">Arduino task watch</a></h3>
+                <p class="summary">A wearable that checks whether I actually did what I said I would, using GPS to confirm where I am, and a mild shock if I didn't.</p>
+                <dl class="readouts">
+                  <div><dt>15 m</dt><dd>geofence radius</dd></div>
+                  <div><dt>8 states</dt><dd>firmware FSM</dd></div>
+                  <div><dt>5</dt><dd>peripherals coordinated</dd></div>
+                </dl>
+                <ul class="tags"><li>C++</li><li>ESP32</li><li>GPS</li><li>State machines</li></ul>
+                <a class="btn" href="projects/task-watch.html">Read the build log</a>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="abroad" aria-labelledby="abroad-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="abroad-title">Abroad</h2>
+          <p>Two summers that shaped how I work with people: teaching and leading in Taiwan, and talking engineering with universities and companies across China.</p>
+        </div>
+        <div class="abroad-grid">
+          <a class="abroad-card" href="abroad/taiwan.html">
+            <div class="frame"><img src="images/taiwan/taiwan-01.jpg" alt="Matthew giving a thumbs up at a waterfront plaza in Taiwan" loading="lazy"></div>
+            <p class="when"><span>Summer 2023</span><span>Foreign Language Education Program</span></p>
+            <h3>Taiwan</h3>
+            <p>Student body president and lead foreign English teacher. Ran 60+ workshops that trained 750+ educators.</p>
+          </a>
+          <a class="abroad-card" href="abroad/china.html">
+            <div class="frame"><div class="placeholder"><span>China photos coming soon</span></div></div>
+            <p class="when"><span>Summer 2025</span><span>SEEChina Engineering Exchange</span></p>
+            <h3>China</h3>
+            <p>Communications and data lead. Led discussions at Tsinghua, Peking, Zhejiang, and Fudan, and at Tencent, BYD, Xiaomi, DJI, and XAG.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="skills-title">Toolkit</h2>
+          <p>What I reach for when I build. Most of it shows up in the projects above.</p>
+        </div>
+        <dl class="skills">
+          <div><dt>Embedded</dt><dd>ESP32, Raspberry Pi, PlatformIO, RISC-V assembly, VHDL, SystemVerilog</dd></div>
+          <div><dt>Languages</dt><dd>C++, Python, Java, JavaScript, MATLAB</dd></div>
+          <div><dt>Vision and ML</dt><dd>OpenCV, PyTorch, Kalman filtering, LLM agents</dd></div>
+          <div><dt>Tools</dt><dd>Git, Linux, Bash, Quartus, Vivado, QuestaSim, Multisim</dd></div>
+          <div><dt>Certifications</dt><dd>AWS Solutions Architect – Associate, AWS AI Practitioner</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for summer 2027 roles in forward-deployed, field, and embedded engineering. The fastest way to reach me is email.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mwu418@gatech.edu">mwu418@gatech.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/matthewkwu" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/mattkwu" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+      <p class="fine">Matthew Wu, Atlanta, Georgia. Built by hand and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
 </body>
 </html>

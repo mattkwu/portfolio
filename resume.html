@@ -1,121 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Resume</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Playfair Display', serif;
-            background-color: #f7f7f7;
-            color: #333;
-        }
-        .resume-container {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.07);
-        }
-        h1, h2 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        h2 {
-            text-decoration: underline;
-        }
-        .section-title {
-            font-size: 1.5em;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        .resume-section {
-            margin-bottom: 30px;
-        }
-        .resume-section h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-        .resume-section ul {
-            padding-left: 20px;
-        }
-        .resume-section ul li {
-            margin-bottom: 8px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resume · Matthew Wu</title>
+  <meta name="description" content="Matthew Wu, computer engineering student at Georgia Tech. Embedded systems, real-time control, and applied AI projects, written up as build logs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="resume.html">Resume</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="resume-container">
-        <h2>Resume</h2>
-        
-         <div class="resume-download">
-        <a href="Resume.pdf" target="_blank">
-            <i class="fas fa-file-pdf"></i> Download Full Resume
-        </a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Matthew Wu</a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#abroad">Abroad</a></li>
+          <li><a href="resume.html" aria-current="page">Resume</a></li>
+          <li class="hide-sm"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-        <div class="resume-section">
-            <h3>Education</h3>
-            <ul>
-                <li><strong>Georgia Institute of Technology,</strong> College of Engineering – Atlanta, GA</li>
-                <li>Bachelor of Science in Computer Engineering (Jun 2024 - May 2028)</li>
-                <li>GPA: 3.9 / 4.0</li>
-                <li>Concentration: Distributed Systems & Software Design</li>
-                <li>Certificates: CA Python 3, CA JavaScript, Foreign English Teaching Certificate</li>
-                <li>Scholarships: Zell Miller (100% tuition)</li>
-                <li>Languages: English (fluent), Mandarin (native), Spanish (intermediate)</li>
-                <li>Organizations: GITMAD, Boxing Club</li>
-                <li>Relevant Coursework: Machine Learning, Systems Administration, Data Structures and Algorithms, Operating Systems</li>
-                <li>Technical Skills: Public Speaking, Python, JavaScript, Matlab, Excel, SQL, RStudio, Tableau, Microsoft, Smartsheet, PowerBI, AWS</li>
-            </ul>
+  <main id="main">
+    <section class="case-hero">
+      <div class="wrap">
+        <h1>Resume</h1>
+        <p class="lede">The full one-page resume. It covers coursework, research, and work experience that the rest of this site leaves out.</p>
+        <div class="btn-row" style="margin-top:24px">
+          <a class="btn primary" href="Resume.pdf" download>Download PDF</a>
+          <a class="btn" href="Resume.pdf" target="_blank" rel="noopener">Open in a new tab</a>
         </div>
-
-        <div class="resume-section">
-            <h3>Professional Experience</h3>
-            <ul>
-                <li><strong>Wyzant Stem Tutor</strong> – Tutor (Aug 2024 - Present): Provided personalized tutoring in math and computer science by adapting instruction and using performance data to strengthen student understanding and outcomes</li>
-                <li><strong>Guest Experience Representative</strong> – Server (August 2021 - Present): Delivered high-volume, multilingual customer service while improving team efficiency and driving online engagement through data-informed content optimization</li>
-                <li><strong>Kumon Tutoring Services</strong> – Manager (Aug 2020 - May 2021): Led staff and students by managing daily operations, improving classroom efficiency, and boosting student academic performance through structured instruction and leadership</li>
-            </ul>
-        </div>
-
-        <div class="resume-section">
-            <h3>Projects</h3>
-            <ul>
-                <li><strong>Ai-assisted Operations Dashboard</strong> – Developer: Built an AI-assisted dashboard that displays real-time task status and priorities to improve planning, decision-making, and operational awareness</li>
-                <li><strong>Arduino Task Watch (TSA)</strong> – Developed a GPS-enabled wearable with embedded C/C++ firmware to verify task completion through time- and location-based tracking</li>
-                <li><strong>Technology Student Association (TSA)</strong> – Co-Vice-President: 1st place in UAV, Music Production, Engineering Design; 11 trophies, 4 chapter awards</li>
-                <li><strong>STEM Academy</strong> – Co-Vice-President/Project Manager: Taught 350+ students, raised $12,000+ over 4 years</li>
-            </ul>
-        </div>
-
-        <div class="resume-section">
-            <h3>Leadership</h3>
-            <ul>
-                <li><strong>SEEChina International Engineering Exchange, China</strong> – Communications & Data Lead: Led program communications and data tracking by managing schedules and engagement metrics to support smooth operations and increase program visibility</li>
-                <li><strong>Foreign Language Education Program, Taiwan</strong> – Student Body President: Recognized by Governor and featured in Taiwan News</li>
-                <li><strong>Lead Foreign English Teacher</strong>: Ran 60 workshops, trained 750 student teachers, increased student performance by 300%</li>
-            </ul>
-        </div>
-
+      </div>
+    </section>
+    <div class="wrap" style="padding-bottom:72px">
+      <iframe class="resume-frame" src="Resume.pdf#view=FitH" title="Matthew Wu resume (PDF)"></iframe>
+      <p class="muted" style="margin-top:12px;font-size:.9rem">If the preview doesn't load on your device, use the download button above.</p>
     </div>
+  </main>
 
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for summer 2027 roles in forward-deployed, field, and embedded engineering. The fastest way to reach me is email.</p>
+      <ul class="contact-links">
+        <li><a href="mailto:mwu418@gatech.edu">mwu418@gatech.edu</a></li>
+        <li><a href="https://www.linkedin.com/in/matthewkwu" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/mattkwu" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      </ul>
+      <p class="fine">Matthew Wu, Atlanta, Georgia. Built by hand and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
 </body>
 </html>
